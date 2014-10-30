@@ -6,34 +6,24 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}"
+    xmlns:local="clr-namespace:iReader.Controls"
+	mc:Ignorable="d"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-    <phone:PhoneApplicationPage.Resources>
-        <DataTemplate x:Key="DataTemplate">
-            <StackPanel Orientation="Vertical">
-                <TextBlock FontSize="23" Foreground="White" TextWrapping="Wrap" Text="{Binding}">
 
-                </TextBlock>
-                <Line X2="480" Height="1" Stroke="White" Fill="Gray">
+	<!--LayoutRoot 是包含所有页面内容的根网格-->
+	<Grid x:Name="LayoutRoot">
+		<Grid.Background>
+			<ImageBrush Stretch="UniformToFill" ImageSource="/Assets/bg/bg2.jpg"/>
+		</Grid.Background>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<local:TextListView x:Name="ListBox" Foreground="Black" Grid.RowSpan="2">
 
-                </Line>
-            </StackPanel>
-        </DataTemplate>
-    </phone:PhoneApplicationPage.Resources>
+		</local:TextListView>
 
-    <!--LayoutRoot 是包含所有页面内容的根网格-->
-    <Grid x:Name="LayoutRoot" Background="Black">
-        <phone:LongListSelector x:Name="ListBox" ItemTemplate="{StaticResource DataTemplate}" Background="Black" Margin="10">
-            <!--苏杭市，一栋高档住宅楼内，一名看起来只有十七八岁的少年有些无精打采，随意的将一沓纸扔到了桌子上。在少年的身前坐着一名大腹便便的中年男子，而在这男子的身后站在两名身穿黑衣的魁梧大汉。
-                少年穿着一身嘻哈休闲装，脚上挂着两只拖鞋。此时正背靠在真皮沙发上，翘着二郎腿，眯着眼睛，打了个哈欠道：“事情已经调查清楚了，你出轨在先，现在李小姐提出离婚，你必须支付家产的一半作为离婚赔偿，总计三千六百万。”
-                “哈哈，你是哪里来的农门工？脑子秀逗了么？要我家产的一半？”中年男子大笑道，像看傻子一样看着眼前的少年，“我告诉你，要钱一分没有！让那个臭娘们给老子死远点！说老子出轨？老子就是出轨了，怎么样？告诉那娘们儿，老子玩儿过的女人多的是！不服气？去告啊，我倒要看看法院怎么判！”
-                “做人要低调，你这样很不好。”少年摇了摇头面色变的严肃道，“李小姐是我的客户，既然收了钱我就把事情办好，这个协议你签也得签，不签也得签。”
-                啪！-->
-        </phone:LongListSelector>
-    </Grid>
+	</Grid>
 
 </phone:PhoneApplicationPage>

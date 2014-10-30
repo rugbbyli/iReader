@@ -20,7 +20,7 @@ namespace iReader
             }
         }
         ulong _position = 0;
-        uint _cacheSize = 1024 * 1024;
+        uint _cacheSize = 1024 * 1024 * 5;
         string _filePath;
 
         public FileCache(string path)

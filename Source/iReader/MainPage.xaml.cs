@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using iReader.Resources;
+using LinqToVisualTree;
 
 namespace iReader
 {
@@ -22,9 +23,50 @@ namespace iReader
 
             _manager = new BookListManager();
 
-            ListBox.ItemsSource = _manager.List;
+			//ListBox.ListBox.ItemsSource = _manager.List;
 
+			ListBox.ItemsSource = _manager.List;
+
+			ListBox.Inited += ListBox_Loaded;
+
+			LayoutRoot.AddHandler(Grid.TapEvent, new EventHandler<System.Windows.Input.GestureEventArgs>(Page_Taped), true);
+			
         }
+
+		void ListBox_Loaded(object sender, EventArgs e)
+		{
+			var elements = ListBox.Descendants().ToList();
+
+			//ListBox.Panel.PageDown();
+		}
+
+		void Page_Taped(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			var pos = e.GetPosition(this);
+			
+			if (pos.Y < this.ActualHeight / 2)
+			{
+				//ListBox.Panel.LineDown();
+				ListBox.Panel.LineDown(); 
+				ListBox.Panel.PageUp();
+			}
+			else
+			{
+				//ListBox.Panel.LineUp();
+				ListBox.Panel.LineUp(); 
+				ListBox.Panel.PageDown();
+			}
+		}
+
+		protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+		{
+			e.Cancel = true;
+
+			if (MessageBox.Show("确定退出吗？", "", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+			{
+				App.Current.Terminate();
+			}
+		}
 
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()

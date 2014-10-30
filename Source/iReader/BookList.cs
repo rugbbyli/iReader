@@ -36,7 +36,7 @@ namespace iReader
         void BookCacheInited()
         {
             System.Diagnostics.Debug.WriteLine("fuck ... " + _cache.Cache.Length);
-            var block = 550;
+            var block = 800;
             var index = 0;
 			var next = 0;
             while(index < _cache.Cache.Length)
