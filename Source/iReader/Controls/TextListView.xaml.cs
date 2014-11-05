@@ -12,11 +12,11 @@ namespace iReader.Controls
 {
 	public partial class TextListView : ItemsControl
 	{
-		BookList ItemsList
+		Book ItemsList
 		{
 			get
 			{
-				return ItemsSource as BookList;
+				return ItemsSource as Book;
 			}
 		}
 

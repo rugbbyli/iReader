@@ -14,18 +14,18 @@ namespace iReader
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        BookListManager _manager;
+        BookManager _manager;
 
         // 构造函数
         public MainPage()
         {
             InitializeComponent();
 
-            _manager = new BookListManager();
+            _manager = new BookManager(App.Current.CurrentBook);
 
 			//ListBox.ListBox.ItemsSource = _manager.List;
 
-			ListBox.ItemsSource = _manager.List;
+			ListBox.ItemsSource = _manager.Book;
 
 			ListBox.Inited += ListBox_Loaded;
 

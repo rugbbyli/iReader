@@ -18,7 +18,50 @@ namespace iReader
         /// <returns>电话应用程序的根框架。</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
 
-        /// <summary>
+		public static new App Current
+		{
+			get
+			{
+				return Application.Current as App;
+			}
+		}
+
+		public BookInfo CurrentBook
+		{
+			get;
+			set;
+		}
+
+		private void InitStorage()
+		{
+			if (!StorageFileHelper.FolderExists("books"))
+			{
+				StorageFileHelper.CreateFolder("books");
+			}
+
+			using (var db = new DataBase.DataBase())
+			{
+				if (!db.DatabaseExists())
+				{
+					try
+					{
+						db.CreateDatabase();
+					}
+					catch
+					{
+						db.Dispose();
+						if (StorageFileHelper.FileExists("DB.sdf"))
+						{
+							StorageFileHelper.DeleteFile("DB.sdf");
+						}
+					}
+				}
+			}
+		}
+
+		#region App EventHandler
+
+		/// <summary>
         /// Application 对象的构造函数。
         /// </summary>
         public App()
@@ -41,20 +84,10 @@ namespace iReader
                 // 显示当前帧速率计数器。
                 Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
-                // 显示在每个帧中重绘的应用程序区域。
-                //Application.Current.Host.Settings.EnableRedrawRegions = true；
-
-                // 启用非生产分析可视化模式，
-                // 该模式显示递交给 GPU 的包含彩色重叠区的页面区域。
-                //Application.Current.Host.Settings.EnableCacheVisualization = true；
-
-                // 通过禁用以下对象阻止在调试过程中关闭屏幕
-                // 应用程序的空闲检测。
-                //  注意: 仅在调试模式下使用此设置。禁用用户空闲检测的应用程序在用户不使用电话时将继续运行
-                // 并且消耗电池电量。
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
 
+			InitStorage();
         }
 
         // 应用程序启动(例如，从“开始”菜单启动)时执行的代码
@@ -67,6 +100,7 @@ namespace iReader
         // 此代码在首次启动应用程序时不执行
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+			
         }
 
         // 停用应用程序(发送到后台)时执行的代码
@@ -218,6 +252,8 @@ namespace iReader
 
                 throw;
             }
-        }
-    }
+		}
+
+		#endregion
+	}
 }

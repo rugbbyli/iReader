@@ -6,30 +6,30 @@ using System.Threading.Tasks;
 
 namespace iReader
 {
-    class BookList : System.Collections.ObjectModel.ObservableCollection<string>
+    class Book : System.Collections.ObjectModel.ObservableCollection<string>
     {
-        public BookList()
+        public Book()
         {
             //this.Capacity = 5;
         }
     }
 
-    class BookListManager
+    class BookManager
     {
         FileCache _cache;
-        BookList _list;
-        public BookList List
+        Book _book;
+        public Book Book
         {
             get
             {
-                return _list;
+                return _book;
             }
         }
 
-        public BookListManager()
+        public BookManager(BookInfo book)
         {
-            _list = new BookList();
-            _cache = new FileCache("");
+            _book = new Book();
+            _cache = new FileCache(book);
             _cache.Init(BookCacheInited);
         }
 
@@ -45,12 +45,12 @@ namespace iReader
 				next = FindNewLinePosition(_cache.Cache, index + length);
 				if (next > 0)
 				{
-					_list.Add(_cache.Cache.ToString(index, next - index));
+					_book.Add(_cache.Cache.ToString(index, next - index));
 					index = next;
 				}
 				else
 				{
-					_list.Add(_cache.Cache.ToString(index, length));
+					_book.Add(_cache.Cache.ToString(index, length));
 					index += length;
 				}
             }

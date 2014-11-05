@@ -21,16 +21,16 @@ namespace iReader
         }
         ulong _position = 0;
         uint _cacheSize = 1024 * 1024 * 5;
-        string _filePath;
+		BookInfo _bookInfo;
 
-        public FileCache(string path)
+        public FileCache(BookInfo book)
         {
-            _filePath = path;
+			_bookInfo = book;
         }
 
         public async void Init(Action Callback)
         {
-            _file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/book.txt"));
+            _file = await StorageFile.GetFileFromPathAsync(_bookInfo.Location);
 
             if (_file != null)
             {
@@ -59,14 +59,6 @@ namespace iReader
                     _position = stream.Position;
                 }
             }
-        }
-
-        public async Task<IStorageFile> PickFile()
-        {
-            Windows.Storage.Pickers.FileOpenPicker picker = new Windows.Storage.Pickers.FileOpenPicker();
-            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.DocumentsLibrary;
-            picker.FileTypeFilter.Add(".txt");
-            return await picker.PickSingleFileAsync();
         }
     }
 }
