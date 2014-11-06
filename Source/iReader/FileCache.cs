@@ -20,7 +20,7 @@ namespace iReader
             }
         }
         ulong _position = 0;
-        uint _cacheSize = 1024 * 1024 * 5;
+        uint _cacheSize = 1024 * 1024 * 4;
 		BookInfo _bookInfo;
 
         public FileCache(BookInfo book)

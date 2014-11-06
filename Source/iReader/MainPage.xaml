@@ -20,7 +20,7 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<local:TextListView x:Name="ListBox" Foreground="Black" Grid.RowSpan="2">
+		<local:TextListView x:Name="ListBox" Foreground="Black" Grid.RowSpan="2" Margin="5,0,0,0">
 
 		</local:TextListView>
 

@@ -25,11 +25,13 @@ namespace iReader.Controls
 		public TextListView()
 		{
 			InitializeComponent();
+
 		}
 
 		void Panel_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			System.Diagnostics.Debug.WriteLine(Panel.VerticalOffset);
+			//System.Diagnostics.Debug.WriteLine(Panel.VerticalOffset);
+			var count = this.Items.Count;
 		}
 
 		protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
@@ -54,8 +56,8 @@ namespace iReader.Controls
 
 		protected override bool IsItemItsOwnContainerOverride(object item)
 		{
-			//var index = ItemsList.IndexOf(item.ToString());
-			//System.Diagnostics.Debug.WriteLine("---------search : " + index + "-----------");
+			var index = ItemsList.IndexOf(item.ToString());
+			System.Diagnostics.Debug.WriteLine("---------search : " + index + "-----------");
 			return base.IsItemItsOwnContainerOverride(item);
 		}
 

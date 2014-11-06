@@ -58,16 +58,6 @@ namespace iReader
 			}
 		}
 
-		protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
-		{
-			e.Cancel = true;
-
-			if (MessageBox.Show("确定退出吗？", "", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
-			{
-				App.Current.Terminate();
-			}
-		}
-
         // 用于生成本地化 ApplicationBar 的示例代码
         //private void BuildLocalizedApplicationBar()
         //{

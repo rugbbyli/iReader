@@ -67,7 +67,6 @@ namespace iReader
 			picker.ViewMode = PickerViewMode.Thumbnail;
 			picker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
 			picker.PickSingleFileAndContinue();
-			
 		}
 
 		protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -87,6 +86,16 @@ namespace iReader
 
 				App.Current.CurrentBook = item;
 				NavigationService.Navigate(new Uri("/iReader;component/MainPage.xaml", System.UriKind.Relative));
+			}
+		}
+
+		protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+		{
+			e.Cancel = true;
+
+			if (MessageBox.Show("确定退出吗？", "", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+			{
+				App.Current.Terminate();
 			}
 		}
 	}

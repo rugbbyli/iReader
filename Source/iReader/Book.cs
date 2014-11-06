@@ -35,8 +35,7 @@ namespace iReader
 
         void BookCacheInited()
         {
-            System.Diagnostics.Debug.WriteLine("fuck ... " + _cache.Cache.Length);
-            var block = 800;
+            var block = 64;
             var index = 0;
 			var next = 0;
             while(index < _cache.Cache.Length)
@@ -45,7 +44,13 @@ namespace iReader
 				next = FindNewLinePosition(_cache.Cache, index + length);
 				if (next > 0)
 				{
-					_book.Add(_cache.Cache.ToString(index, next - index));
+					var txt = _cache.Cache.ToString(index, next - index);
+					_book.Add(txt);
+					
+					while (next < _cache.Cache.Length && (_cache.Cache[next] == '\r' || _cache.Cache[next] == '\n'))
+					{
+						next++;
+					}
 					index = next;
 				}
 				else
