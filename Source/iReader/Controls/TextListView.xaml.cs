@@ -32,20 +32,24 @@ namespace iReader.Controls
 		{
 			//System.Diagnostics.Debug.WriteLine(Panel.VerticalOffset);
 			var count = this.Items.Count;
+			var count2 = this.Panel.Children.Count;
+			var cur = Panel.Children[Panel.Children.Count / 2];
+			//
+			//System.Diagnostics.Debug.WriteLine("current item:" + index);
 		}
 
 		protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
 		{
 			base.PrepareContainerForItemOverride(element, item);
 			var index = ItemsList.IndexOf(item.ToString());
-			System.Diagnostics.Debug.WriteLine("---------prepare : " + index + "-----------");
+			//System.Diagnostics.Debug.WriteLine("---------prepare : " + index + "-----------");
 		}
 
 		protected override void ClearContainerForItemOverride(DependencyObject element, object item)
 		{
 			var index = ItemsList.IndexOf(item.ToString());
 			base.ClearContainerForItemOverride(element, item);
-			System.Diagnostics.Debug.WriteLine("---------clear : " + index + "-----------");
+			//System.Diagnostics.Debug.WriteLine("---------clear : " + index + "-----------");
 		}
 
 		protected override DependencyObject GetContainerForItemOverride()
@@ -57,7 +61,7 @@ namespace iReader.Controls
 		protected override bool IsItemItsOwnContainerOverride(object item)
 		{
 			var index = ItemsList.IndexOf(item.ToString());
-			System.Diagnostics.Debug.WriteLine("---------search : " + index + "-----------");
+			//System.Diagnostics.Debug.WriteLine("---------search : " + index + "-----------");
 			return base.IsItemItsOwnContainerOverride(item);
 		}
 
