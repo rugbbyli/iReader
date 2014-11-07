@@ -103,6 +103,7 @@
     <Compile Include="BookInfo.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="BookListViewModel.cs" />
+    <Compile Include="Common\CollectionToVisibilityConverter.cs" />
     <Compile Include="Controls\MyStackPanel.cs" />
     <Compile Include="Controls\TextListView.xaml.cs">
       <DependentUpon>TextListView.xaml</DependentUpon>
@@ -141,6 +142,10 @@
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\ResourceDic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="StartPage.xaml">
       <SubType>Designer</SubType>

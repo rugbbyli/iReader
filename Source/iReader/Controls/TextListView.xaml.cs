@@ -25,7 +25,7 @@ namespace iReader.Controls
 		public TextListView()
 		{
 			InitializeComponent();
-
+			
 		}
 
 		void Panel_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

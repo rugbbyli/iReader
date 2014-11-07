@@ -7,8 +7,13 @@
 
     <!--应用程序资源-->
     <Application.Resources>
-        <local:LocalizedStrings xmlns:local="clr-namespace:iReader" x:Key="LocalizedStrings"/>
-    </Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="Resources/ResourceDic.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+			<local:LocalizedStrings xmlns:local="clr-namespace:iReader" x:Key="LocalizedStrings"/>
+		</ResourceDictionary>
+	</Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
         <!--处理应用程序的生存期事件所需的对象-->

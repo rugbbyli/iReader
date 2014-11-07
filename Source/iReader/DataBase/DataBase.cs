@@ -14,5 +14,24 @@ namespace iReader.DataBase
 		public DataBase() : base(ConnectionString) { }
 
 		public Table<BookInfo> Books;
+
+		public void Update(BookInfo book)
+		{
+			var old = Books.Single(item => item.ID == book.ID);
+			old.CopyProperties(book);
+			this.SubmitChanges(ConflictMode.ContinueOnConflict);
+		}
+
+		public void Insert(BookInfo book)
+		{
+			Books.InsertOnSubmit(book);
+			SubmitChanges();
+		}
+
+		public void Delete(BookInfo book)
+		{
+			Books.DeleteOnSubmit(book);
+			SubmitChanges();
+		}
 	}
 }

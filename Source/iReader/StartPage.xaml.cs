@@ -21,6 +21,9 @@ namespace iReader
 		{
 			InitializeComponent();
 			ViewModel = Resources["ViewModel"] as BookListViewModel;
+			//var source = ListBox_BookList.ItemsSource as System.Windows.Data.CollectionViewSource;
+			//source.SortDescriptions.Add(new System.ComponentModel.SortDescription("LastReadTime", System.ComponentModel.ListSortDirection.Descending));
+
 			PhoneApplicationService.Current.ContractActivated += Current_ContractActivated;
 		}
 
@@ -78,15 +81,8 @@ namespace iReader
 
 		private void ListBox_BookList_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			var item = ListBox_BookList.SelectedItem as BookInfo;
-
-			if (item != null)
-			{
-				item.LastReadTime = DateTime.Now;
-
-				App.Current.CurrentBook = item;
-				NavigationService.Navigate(new Uri("/iReader;component/MainPage.xaml", System.UriKind.Relative));
-			}
+			if (ListBox_BookList == null) return;
+			
 		}
 
 		protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -96,6 +92,21 @@ namespace iReader
 			if (MessageBox.Show("确定退出吗？", "", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
 			{
 				App.Current.Terminate();
+			}
+		}
+
+		private void ListBox_Item_Click(object sender, System.Windows.Input.GestureEventArgs e)
+		{
+			var item = ListBox_BookList.SelectedItem as BookInfo;
+
+			if (item != null)
+			{
+				item.LastReadTime = DateTime.Now;
+				ViewModel.UpdateBook(item);
+				App.Current.CurrentBook = item;
+				NavigationService.Navigate(new Uri("/iReader;component/MainPage.xaml", System.UriKind.Relative));
+
+				ListBox_BookList.SelectedIndex = -1;
 			}
 		}
 	}
