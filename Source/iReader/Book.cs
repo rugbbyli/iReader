@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace iReader
 {
-    class Book : System.Collections.ObjectModel.ObservableCollection<string>
+    class Book : System.Collections.ObjectModel.ObservableCollection<Page>
     {
         public Book()
         {
@@ -45,7 +45,7 @@ namespace iReader
 				if (next > 0)
 				{
 					var txt = _cache.Cache.ToString(index, next - index);
-					_book.Add(txt);
+					_book.Add(new Page() { ID = _book.Count + 1, Content = txt });
 					
 					while (next < _cache.Cache.Length && (_cache.Cache[next] == '\r' || _cache.Cache[next] == '\n'))
 					{
@@ -55,7 +55,7 @@ namespace iReader
 				}
 				else
 				{
-					_book.Add(_cache.Cache.ToString(index, length));
+					_book.Add(new Page() { ID = _book.Count + 1, Content = _cache.Cache.ToString(index, length) });
 					index += length;
 				}
             }
