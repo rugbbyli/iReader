@@ -22,10 +22,41 @@ namespace iReader.Controls
 
 		public VirtualizingStackPanel Panel { get; private set; }
 
+		public ScrollViewer ScrollViewer { get; private set; }
+
 		public TextListView()
 		{
 			InitializeComponent();
-			
+			ScrollViewer = GetTemplateChild("ScrollViewer") as ScrollViewer;
+			SetScrollViewerBinding();
+		}
+
+		void SetScrollViewerBinding()
+		{
+			var binding = new System.Windows.Data.Binding();
+			binding.Source = ScrollViewer;
+			binding.Path = new PropertyPath("VerticalOffset");
+			binding.Mode = System.Windows.Data.BindingMode.OneWay;
+			this.SetBinding(ScrollViewVerticalOffsetProperty, binding);
+		}
+
+		public static readonly DependencyProperty ScrollViewVerticalOffsetProperty =
+		DependencyProperty.Register(
+									"ScrollViewVerticalOffset",
+									typeof(double),
+									typeof(TextListView),
+									new PropertyMetadata(new PropertyChangedCallback(OnScrollViewVerticalOffsetChanged))
+									);
+
+		private static void OnScrollViewVerticalOffsetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			System.Diagnostics.Debug.WriteLine(e.NewValue);
+		}
+
+		public double ScrollViewVerticalOffset
+		{
+			get { return (double)this.GetValue(ScrollViewVerticalOffsetProperty); }
+			set { this.SetValue(ScrollViewVerticalOffsetProperty, value); }
 		}
 
 		void Panel_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

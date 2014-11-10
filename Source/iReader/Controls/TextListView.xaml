@@ -1,0 +1,81 @@
+﻿<ItemsControl x:Class="iReader.Controls.TextListView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="480" d:DesignWidth="480">
+	<ItemsControl.Resources>
+		<Style x:Key="ScrollViewerStyle" TargetType="ScrollViewer">
+			<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+			<Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ScrollViewer">
+						<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="ScrollStates">
+									<VisualStateGroup.Transitions>
+										<VisualTransition GeneratedDuration="00:00:00.5"/>
+									</VisualStateGroup.Transitions>
+									<VisualState x:Name="Scrolling">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
+											<DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="NotScrolling"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Grid Margin="{TemplateBinding Padding}">
+								<ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
+								<ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
+								<ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto"/>
+							</Grid>
+						</Border>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</ItemsControl.Resources>
+	<ItemsControl.ItemsPanel>
+		<ItemsPanelTemplate>
+			<VirtualizingStackPanel x:Name="ContentPanel" Loaded="ItemsPanelTemplate_Panel_Loaded" VirtualizingStackPanel.VirtualizationMode="Recycling" Orientation="Vertical">
+
+			</VirtualizingStackPanel>
+		</ItemsPanelTemplate>
+	</ItemsControl.ItemsPanel>
+	<ItemsControl.ItemTemplate>
+		<DataTemplate>
+			<StackPanel Orientation="Vertical">
+				<TextBlock TextWrapping="Wrap" FontSize="25" LineHeight="40" LineStackingStrategy="BlockLineHeight" CharacterSpacing="100" Text="{Binding Content}" Foreground="Black" FontFamily="Segoe UI Emoji" FontStretch="UltraExpanded">
+				</TextBlock>
+				<Line Height="10" Margin="5" Fill="Red" Stroke="Red" VerticalAlignment="Top" X2="480" StrokeThickness="5"/>
+			</StackPanel>
+		</DataTemplate>
+	</ItemsControl.ItemTemplate>
+	<ItemsControl.Template>
+		<ControlTemplate>
+			<ScrollViewer x:Name="ScrollViewer">
+				<ItemsPresenter/>
+			</ScrollViewer>
+		</ControlTemplate>
+	</ItemsControl.Template>
+	<!--表情淡漠的离开大厅，有些神不守舍的萧炎按照平日的习惯，慢慢的攀上了家族的后山，坐在山壁之上，平静的望着对面笼罩在雾气之中的险峻山峦，那里，是加玛帝国闻名的魔兽山脉。
+    “呵呵，实力呐…这个世界，没有实力，连一坨狗屎都不如，至少，狗屎还没人敢去踩！”肩膀轻轻的耸动，少年那低沉的自嘲笑声，带着悲愤，在山顶上缓缓的徘徊。
+    十指插进一头黑发之中，萧炎牙齿紧紧的咬着嘴唇，任由那淡淡的血腥在嘴角散开，虽然在大厅中他并没有表现出什么不妥的情绪，可纳兰嫣然的那一句句话，却是犹如刀割在心头一般，让得萧炎浑身颤粟…
+    “今日的侮辱，我不想再受第二次！”摊开那有着一道血痕的左手，萧炎的声音，嘶哑却坚定。
+    “嘿嘿，小娃娃，看来你需要帮助啊？”
+    就在萧炎心中刻下誓言之时，一道苍老的怪笑声，忽然的传进了耳朵。
+    小脸一变，萧炎豁然转身，鹰般锐利的目光在身后一阵扫视，可却未曾发现半个人影…
+    “嘿嘿，别找了，在你手指上呢。”
+    就在萧炎以为只是错觉之时，那怪笑声，再次毫无边际的传出。
+    眼瞳一缩，萧炎的目光，陡然停在了右手之上…的黑色古朴戒指。
+    “是你在说话？”萧炎强忍住心头的惊恐，努力让自己声音平静下来。
+    “小娃娃定力还不错，竟然没被吓得跳下去。”戒指之中，响起戏谑的笑声。
+    “你是谁？为什么在我的戒指之中？你想干什么？”-->
+</ItemsControl>
