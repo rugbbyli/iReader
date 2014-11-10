@@ -20,7 +20,7 @@ namespace iReader
         public MainPage()
         {
             InitializeComponent();
-
+            var bar = GetTemplateChild("VerticalScrollBar");
             _manager = new BookManager(App.Current.CurrentBook);
 
 			//ListBox.ListBox.ItemsSource = _manager.List;
@@ -30,13 +30,13 @@ namespace iReader
 			ListBox.Inited += ListBox_Loaded;
 
 			LayoutRoot.AddHandler(Grid.TapEvent, new EventHandler<System.Windows.Input.GestureEventArgs>(Page_Taped), true);
-			
         }
 
 		void ListBox_Loaded(object sender, EventArgs e)
 		{
-			var elements = ListBox.Descendants().ToList();
+			//var elements = ListBox.Descendants().ToList();
 
+            //ListBox.ScrollBar.Value = App.Current.CurrentBook.ScrollProgress;
 			//ListBox.Panel.PageDown();
 		}
 
@@ -47,7 +47,7 @@ namespace iReader
 			if (pos.Y < this.ActualHeight / 2)
 			{
 				//ListBox.Panel.LineDown();
-				ListBox.Panel.LineDown(); 
+				ListBox.Panel.LineDown();
 				ListBox.Panel.PageUp();
 			}
 			else

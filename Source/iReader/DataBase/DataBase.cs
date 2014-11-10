@@ -10,8 +10,12 @@ namespace iReader.DataBase
 	public class DataBase : DataContext
 	{
 		const string ConnectionString = "Data Source='isostore:/DB.sdf'";
+        public static DataBase Current { get; private set; }
 
-		public DataBase() : base(ConnectionString) { }
+		public DataBase() : base(ConnectionString) 
+        {
+            Current = this;
+        }
 
 		public Table<BookInfo> Books;
 

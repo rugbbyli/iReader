@@ -4,6 +4,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    
     d:DesignHeight="480" d:DesignWidth="480">
 	<ItemsControl.Resources>
 		<Style x:Key="ScrollViewerStyle" TargetType="ScrollViewer">
@@ -33,7 +34,7 @@
 							</VisualStateManager.VisualStateGroups>
 							<Grid Margin="{TemplateBinding Padding}">
 								<ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
-								<ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
+								<ScrollBar Scroll="ScrollBar_Scroll" Loaded="ScrollBar_Vertical_Loaded" x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
 								<ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto"/>
 							</Grid>
 						</Border>
@@ -60,7 +61,7 @@
 	</ItemsControl.ItemTemplate>
 	<ItemsControl.Template>
 		<ControlTemplate>
-			<ScrollViewer x:Name="ScrollViewer">
+			<ScrollViewer x:Name="ScrollViewer" Style="{StaticResource ScrollViewerStyle}">
 				<ItemsPresenter/>
 			</ScrollViewer>
 		</ControlTemplate>

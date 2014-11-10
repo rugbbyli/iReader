@@ -126,9 +126,6 @@
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="StorageFileHelper.cs" />
-    <Compile Include="TextListView.xaml.cs">
-      <DependentUpon>TextListView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="VirtualCollection.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,10 +146,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="StartPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TextListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
