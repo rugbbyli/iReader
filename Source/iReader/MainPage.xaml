@@ -11,19 +11,31 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-	<!--LayoutRoot 是包含所有页面内容的根网格-->
-	<Grid x:Name="LayoutRoot">
-		<Grid.Background>
-			<ImageBrush Stretch="UniformToFill" ImageSource="/Assets/bg/bg2.jpg"/>
-		</Grid.Background>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<local:TextListView x:Name="ListBox" Foreground="Black" Grid.RowSpan="2" Margin="5,0,0,0">
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/Assets/bg/bg2.jpg"/>
+        </Grid.Background>
 
-		</local:TextListView>
+        <local:TextListView x:Name="ListBox" Foreground="Black" Grid.RowSpan="3" Margin="5,0,0,0" Grid.ColumnSpan="3">
 
-	</Grid>
+        </local:TextListView>
+
+        <Grid x:Name="Menu" Grid.RowSpan="3" Grid.ColumnSpan="3">
+            <Border VerticalAlignment="Bottom" Height="70" Background="#99000000">
+                <Slider x:Name="Slider_Progress" Maximum="{Binding ScrollBar.Maximum, ElementName=ListBox}" VerticalAlignment="Center" Style="{StaticResource SliderStyle}" Value="{Binding ScrollBar.Value, ElementName=ListBox, Mode=TwoWay}"/>
+            </Border>
+        </Grid>
+    </Grid>
 
 </phone:PhoneApplicationPage>

@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Controls.Primitives;
+using LinqToVisualTree;
 
 namespace iReader.Controls
 {
@@ -23,12 +24,12 @@ namespace iReader.Controls
 
         public VirtualizingStackPanel Panel { get; private set; }
 
-        public ScrollViewer ScrollViewer { get; private set; }
         public ScrollBar ScrollBar { get; private set; }
 
         public TextListView()
         {
             InitializeComponent();
+            this.Opacity = 0;
         }
 
         //void SetScrollViewerBinding()
@@ -99,14 +100,20 @@ namespace iReader.Controls
         //    return base.IsItemItsOwnContainerOverride(item);
         //}
 
-        private void ItemsPanelTemplate_Panel_Loaded(object sender, RoutedEventArgs e)
+        private async void ItemsPanelTemplate_Panel_Loaded(object sender, RoutedEventArgs e)
         {
+            if (Panel != null) return;
             Panel = (sender as VirtualizingStackPanel);
+
+            await System.Threading.Tasks.Task.Delay(1);
+
             Panel.ScrollOwner.ScrollToVerticalOffset(App.Current.CurrentBook.ScrollProgress);
-            //ScrollViewer = Panel.ScrollOwner;
-            //SetScrollViewerBinding();
-            //Panel.MouseLeftButtonUp += Panel_MouseLeftButtonUp;
-            //OnInited();
+            this.Opacity = 1;
+
+            ScrollBar = (ScrollBar)Panel.ScrollOwner.Descendants<ScrollBar>().Single((obj) => { return (obj as ScrollBar).Name == "VerticalScrollBar"; });
+            ScrollBar.Scroll += ScrollBar_Scroll;
+            ScrollBar.ValueChanged += ScrollBar_ValueChanged;
+            OnInited();
         }
 
         public event EventHandler Inited;
@@ -118,17 +125,9 @@ namespace iReader.Controls
             }
         }
 
-        private void ScrollBar_Vertical_Loaded(object sender, RoutedEventArgs e)
-        {
-            ScrollBar = sender as ScrollBar;
-            ScrollBar.Scroll += ScrollBar_Scroll;
-            ScrollBar.ValueChanged += ScrollBar_ValueChanged;
-            OnInited();
-        }
-
         void ScrollBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            System.Diagnostics.Debug.WriteLine(e.NewValue + "," + Panel.VerticalOffset + "," + Panel.ScrollOwner.VerticalOffset);
+            System.Diagnostics.Debug.WriteLine(e.NewValue + "," + Panel.VerticalOffset + "," + Panel.ScrollOwner.ScrollableHeight);
             App.Current.CurrentBook.ScrollProgress = ScrollBar.Value;
             App.Current.CurrentBook.Position = (int)(ScrollBar.Value / ScrollBar.Maximum * App.Current.CurrentBook.Length);
 

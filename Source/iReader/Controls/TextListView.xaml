@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:iReader.Controls"
     mc:Ignorable="d"
     
     d:DesignHeight="480" d:DesignWidth="480">
@@ -34,7 +35,7 @@
 							</VisualStateManager.VisualStateGroups>
 							<Grid Margin="{TemplateBinding Padding}">
 								<ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"/>
-								<ScrollBar Scroll="ScrollBar_Scroll" Loaded="ScrollBar_Vertical_Loaded" x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
+								<ScrollBar Scroll="ScrollBar_Scroll" x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
 								<ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto"/>
 							</Grid>
 						</Border>
@@ -55,7 +56,6 @@
 			<StackPanel Orientation="Vertical">
 				<TextBlock TextWrapping="Wrap" FontSize="25" LineHeight="40" LineStackingStrategy="BlockLineHeight" CharacterSpacing="100" Text="{Binding Content}" Foreground="Black" FontFamily="Segoe UI Emoji" FontStretch="UltraExpanded">
 				</TextBlock>
-				<Line Height="10" Margin="5" Fill="Red" Stroke="Red" VerticalAlignment="Top" X2="480" StrokeThickness="5"/>
 			</StackPanel>
 		</DataTemplate>
 	</ItemsControl.ItemTemplate>

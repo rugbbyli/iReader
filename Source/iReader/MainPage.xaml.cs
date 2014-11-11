@@ -30,6 +30,7 @@ namespace iReader
 			ListBox.Inited += ListBox_Loaded;
 
 			LayoutRoot.AddHandler(Grid.TapEvent, new EventHandler<System.Windows.Input.GestureEventArgs>(Page_Taped), true);
+            Menu.Visibility = System.Windows.Visibility.Collapsed;
         }
 
 		void ListBox_Loaded(object sender, EventArgs e)
@@ -42,20 +43,33 @@ namespace iReader
 
 		void Page_Taped(object sender, System.Windows.Input.GestureEventArgs e)
 		{
+            if (Menu.Visibility == System.Windows.Visibility.Visible)
+            {
+                Menu.Visibility = System.Windows.Visibility.Collapsed;
+                return;
+            }
 			var pos = e.GetPosition(this);
+
+            var col = (int)(pos.X * 3 / this.ActualWidth);
+            var row = (int)(pos.Y * 3 / this.ActualHeight);
 			
-			if (pos.Y < this.ActualHeight / 2)
+			if(col == 2 || row == 2)
+			{
+				//ListBox.Panel.LineUp(); 
+				//ListBox.Panel.PageDown();
+                //ListBox.Panel.SetVerticalOffset(ListBox.Panel.VerticalOffset + 1.62);
+			}
+			else if (col == 0 || row == 0)
 			{
 				//ListBox.Panel.LineDown();
-				ListBox.Panel.LineDown();
-				ListBox.Panel.PageUp();
+				//ListBox.Panel.PageUp();
+                //ListBox.Panel.SetVerticalOffset(ListBox.Panel.VerticalOffset - 1.62);
+                
 			}
-			else
-			{
-				//ListBox.Panel.LineUp();
-				ListBox.Panel.LineUp(); 
-				ListBox.Panel.PageDown();
-			}
+            else
+            {
+                Menu.Visibility = System.Windows.Visibility.Visible;
+            }
 		}
 
         // 用于生成本地化 ApplicationBar 的示例代码
